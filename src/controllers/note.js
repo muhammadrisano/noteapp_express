@@ -12,6 +12,17 @@ module.exports = {
                 console.log(err)
             })
     },
+    searchNote: (req, res) => {
+        const data = req.params.data
+        noteModels.searchNote(data)
+            .then((resultnote) => {
+                const result = resultnote
+                MiscHelper.response(res, result, 200)
+            })
+            .catch((err) => {
+                console.log(err)
+            })
+    },
     noteDetail: (req, res) => {
         const id_note = req.params.id_note
         console.log(id_note)

@@ -35,6 +35,17 @@ module.exports = {
             })
         })
     },
+    searchNote: (data) => {
+        return new Promise((resolve, reject) => {
+            connection.query("SELECT note.*, category.name_category, category.color FROM note INNER JOIN category ON note.id_category = category.id_category WHERE note.title LIKE ?", `%${data}%`, (err, result) => {
+                if (!err) {
+                    resolve(result)
+                } else {
+                    reject(new Error(err))
+                }
+            })
+        })
+    },
     byCategory: (id_category) => {
         return new Promise((resolve, reject) => {
             connection.query("SELECT note.*, category.name_category, category.color FROM note INNER JOIN category ON note.id_category = category.id_category WHERE note.id_category =?", id_category, (err, result) => {
